@@ -1,0 +1,10 @@
+1. List all students-works
+2. List all themes-works
+3. List all grades-works
+4. Add a student-works
+5. Add a new theme-works
+6. Add a grade to a student-does not work
+7. Delete a student - works
+8. Delete a theme - does not work (without delete on cascade for the grade class)
+9. Update student - works
+10. Update theme - does not work
