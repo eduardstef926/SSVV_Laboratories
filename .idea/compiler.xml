@@ -9,8 +9,5 @@
         <module name="MonitorizareTemeLaboratorV01" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="MonitorizareTemeLaboratorV01" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
