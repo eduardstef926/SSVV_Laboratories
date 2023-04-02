@@ -1,7 +1,7 @@
 package ssvv.example.repository;
 
 import ssvv.example.domain.HasID;
-import ssvv.example.validation.ValidationException;
+import ssvv.example.exceptions.*;
 import ssvv.example.validation.Validator;
 
 public abstract class AbstractFileRepository<ID, E extends HasID<ID>> extends AbstractCRUDRepository<ID,E>{
@@ -23,11 +23,9 @@ public abstract class AbstractFileRepository<ID, E extends HasID<ID>> extends Ab
     }
 
     @Override
-    public E save(E entity) throws ValidationException {
+    public E save(E entity) throws ValidationException, AlreadyExistingEntityException {
         E result = super.save(entity);
-        if (result == null) {
-            writeToFile(entity);
-        }
+        writeToFile(entity);
         return result;
     }
 

@@ -1,6 +1,7 @@
 package ssvv.example.service;
 
 import ssvv.example.domain.*;
+import ssvv.example.exceptions.*;
 import ssvv.example.repository.*;
 
 import java.time.LocalDate;
@@ -24,14 +25,8 @@ public class Service {
 
     public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
 
-    public int saveStudent(String id, String nume, int grupa) {
-        Student student = new Student(id, nume, grupa);
-        Student result = studentXmlRepo.save(student);
-
-        if (result == null) {
-            return 1;
-        }
-        return 0;
+    public void saveStudent(String id, String nume, int grupa) throws ValidationException, AlreadyExistingEntityException {
+        studentXmlRepo.save(new Student(id, nume, grupa));
     }
 
     public int saveTema(String id, String descriere, int deadline, int startline) {

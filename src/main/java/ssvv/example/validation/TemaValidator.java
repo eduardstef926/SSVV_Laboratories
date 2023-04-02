@@ -1,5 +1,6 @@
 package ssvv.example.validation;
 import ssvv.example.domain.Tema;
+import ssvv.example.exceptions.ValidationException;
 
 public class TemaValidator implements Validator<Tema> {
     public void validate(Tema tema) throws ValidationException {

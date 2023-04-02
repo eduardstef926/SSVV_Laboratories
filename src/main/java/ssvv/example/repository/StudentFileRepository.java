@@ -1,6 +1,7 @@
 package ssvv.example.repository;
 
 import ssvv.example.domain.Student;
+import ssvv.example.exceptions.ValidationException;
 import ssvv.example.validation.*;
 
 import java.io.*;

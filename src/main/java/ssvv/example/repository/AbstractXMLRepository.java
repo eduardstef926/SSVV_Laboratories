@@ -1,7 +1,7 @@
 package ssvv.example.repository;
 
 import ssvv.example.domain.HasID;
-import ssvv.example.validation.ValidationException;
+import ssvv.example.exceptions.*;
 import ssvv.example.validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,11 +78,9 @@ public abstract class AbstractXMLRepository<ID, E extends HasID<ID>> extends Abs
     }
 
     @Override
-    public E save(E entity) throws ValidationException {
+    public E save(E entity) throws ValidationException, AlreadyExistingEntityException {
         E result = super.save(entity);
-        if (result == null) {
-            writeToXmlFile();
-        }
+        writeToXmlFile();
         return result;
     }
 

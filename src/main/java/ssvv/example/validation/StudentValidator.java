@@ -1,5 +1,6 @@
 package ssvv.example.validation;
 import ssvv.example.domain.Student;
+import ssvv.example.exceptions.ValidationException;
 
 public class StudentValidator implements Validator<Student> {
     public void validate(Student student) throws ValidationException {
