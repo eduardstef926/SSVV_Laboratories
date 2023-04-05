@@ -1,8 +1,10 @@
 package ssvv.example;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ssvv.example.exceptions.ValidationException;
 import ssvv.example.repository.NotaXMLRepository;
 import ssvv.example.repository.StudentXMLRepository;
 import ssvv.example.repository.TemaXMLRepository;
@@ -10,13 +12,13 @@ import ssvv.example.service.Service;
 import ssvv.example.validation.NotaValidator;
 import ssvv.example.validation.StudentValidator;
 import ssvv.example.validation.TemaValidator;
-import ssvv.example.exceptions.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.stream.StreamSupport;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StudentTest {
     private static final String VALID_ID = "9";
@@ -94,11 +96,11 @@ public class StudentTest {
         assertDoesNotThrow(addedStudentOptional::get);
 
         var addedStudent = addedStudentOptional.orElse(null);
-        assertNotNull(addedStudent);
+        Assert.assertNotNull(addedStudent);
 
-        assertEquals(addedStudent.getID(), id);
-        assertEquals(addedStudent.getNume(), name);
-        assertEquals(addedStudent.getGrupa(), group);
+        Assert.assertEquals(addedStudent.getID(), id);
+        Assert.assertEquals(addedStudent.getNume(), name);
+        Assert.assertEquals(addedStudent.getGrupa(), group);
     }
 
     @Test
