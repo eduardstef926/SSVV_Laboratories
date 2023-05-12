@@ -46,7 +46,6 @@ public class ServiceTest {
         verify(studentRepo, times(1)).save(student);
     }
 
-
     @Test
     public void testAddAssignment() {
         Tema tema = new Tema("1", "Assignment 1", 2, 1);
@@ -78,5 +77,41 @@ public class ServiceTest {
         testAddAssignment();
 
         testAddGrade();
+    }
+
+
+    @Test
+    public void testAddStudentAndAssignment() {
+        Student student = new Student("2", "Sylvester Stallone", 936);
+        when(studentRepo.save(student)).thenReturn(student);
+        service.saveStudent("2", "Sylvester Stallone", 936);
+        verify(studentRepo, times(1)).save(student);
+
+        Tema tema = new Tema("2", "Assignment 2", 5, 2);
+        when(temaRepo.findOne("2")).thenReturn(null);
+        when(temaRepo.save(tema)).thenReturn(tema);
+        assertEquals(0, service.saveTema("2", "Assignment 2", 5, 2));
+    }
+
+    @Test
+    public void testAddStudentAssignmentAndGrade() {
+        Student student = new Student("2", "Sylvester Stallone", 936);
+        when(studentRepo.save(student)).thenReturn(student);
+        service.saveStudent("2", "Sylvester Stallone", 936);
+        verify(studentRepo, times(1)).save(student);
+
+        Tema tema = new Tema("2", "Assignment 2", 5, 2);
+        when(temaRepo.findOne("2")).thenReturn(null);
+        when(temaRepo.save(tema)).thenReturn(tema);
+        assertEquals(0, service.saveTema("2", "Assignment 2", 5, 2));
+
+        Pair<String, String> idNota = new Pair<>("2", "2");
+        Nota nota = new Nota(idNota, 10, 4, "Good Job");
+
+        when(studentRepo.findOne("2")).thenReturn(student);
+        when(temaRepo.findOne("2")).thenReturn(tema);
+        when(notaRepo.save(nota)).thenReturn(nota);
+
+        assertEquals(1, service.saveNota("2", "2", 10, 4, "Good Job"));
     }
 }
